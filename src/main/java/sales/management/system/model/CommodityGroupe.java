@@ -27,6 +27,9 @@ public class CommodityGroupe {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="commodity_groupe_id", unique = true, nullable = false)
 	private int id;
+
+	@Column(nullable = false,length = 40)
+	private String name;
 	
 	@ManyToOne
 	@JoinColumn(name="company_id")

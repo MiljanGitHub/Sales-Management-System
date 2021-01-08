@@ -1,5 +1,6 @@
 package sales.management.system.model;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -25,6 +26,12 @@ public class Tax {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="tax_id", unique = true, nullable = false)
 	private int id;
+
+	@Column(precision = 2,length = 15) // 5 or 15 ?
+	private double percentage;
+
+	@Column(nullable = false)
+	private LocalDate validFrom;
 	
 	@OneToMany(mappedBy = "tax")
 	private Set<CommodityGroupe> commodityGroups;

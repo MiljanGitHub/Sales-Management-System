@@ -1,6 +1,7 @@
 package sales.management.system.model;
 
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -28,12 +29,15 @@ public class Pricelist {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pricelist_id", unique = true, nullable = false)
 	private int id;
-	
+
+	@Column(nullable = false)
+	private LocalDateTime validFrom;
+
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
 	
 	@OneToMany(mappedBy = "commodity")
-	private Set<PricelistItem> pricelistItems;
+	private Set<PricelistItem> priceListItems;
 
 }

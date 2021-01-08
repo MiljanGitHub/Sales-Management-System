@@ -25,7 +25,19 @@ public class Company {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="company_id", unique = true, nullable = false)
 	private int id;
-	
+
+	@Column(nullable = false,length = 100)
+	private String name;
+
+	@Column(nullable = false,length = 50)
+	private String address;
+
+	@Column(length = 20)
+	private String phoneNumber;
+
+	@Column(length = 29)
+	private String fax;
+
 	@OneToMany(mappedBy = "company")
 	private Set<Invoice> invoices;
 	
@@ -39,7 +51,7 @@ public class Company {
 	private Set<Commodity> commodities;
 	
 	@OneToMany(mappedBy = "company")
-	private Set<Pricelist> pricelists;
+	private Set<Pricelist> priceLists;
 	
 	@OneToMany(mappedBy = "company")
 	private Set<CommodityGroupe> commodityGroups;

@@ -25,6 +25,12 @@ public class Unit {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="unit_id", unique = true, nullable = false)
 	private int id;
+
+	@Column(nullable = false,length = 20)
+	private String name;
+
+	@Column(nullable = false,length = 10)
+	private String shortName;
 	
 	@OneToMany(mappedBy = "unit")
 	private Set<Commodity> commodities;

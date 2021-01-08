@@ -24,7 +24,10 @@ public class PricelistItem {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pricelistitem_id", unique = true, nullable = false)
 	private int id;
-	
+
+	@Column(precision = 2,nullable = false)
+	private double price;
+
 	@ManyToOne
 	@JoinColumn(name="commodity_id")
 	private Commodity commodity;

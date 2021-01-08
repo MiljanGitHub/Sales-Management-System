@@ -27,7 +27,16 @@ public class Commodity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="commodity_id", unique = true, nullable = false)
 	private int id;
-	
+
+	@Column(nullable = false,length = 70)
+	private String name;
+
+	@Column(nullable = false,length = 100)
+	private String description;
+
+	@Column(nullable = false,length = 100)
+	private boolean goods;  // goods or service
+
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;

@@ -28,6 +28,12 @@ public class BussinesYear {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="bussines_year_id", unique = true, nullable = false)
 	private int id;
+
+	@Column(nullable = false, length = 4)
+	private int year;
+
+	@Column(nullable = false)
+	private boolean finished; // da li je zakljucena ili ne ako ima bolja rec ubaciti
 	
 	@ManyToOne
 	@JoinColumn(name="company_id")

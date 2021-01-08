@@ -24,7 +24,31 @@ public class Item {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="item_id", unique = true, nullable = false)
 	private int id;
-	
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double amount;
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double rebate;
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double unitPrice;
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double basis;
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double taxPercentage;
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double taxAmount;
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double totalAmount;
+
+	@Column(nullable = false,precision = 2,length = 15)
+	private double taxTotal;
+
 	
 	@ManyToOne
 	@JoinColumn(name="invoice_id")
