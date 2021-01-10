@@ -1,13 +1,18 @@
 package sales.management.system.dummyController;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import sales.management.system.dummy_dto.BussinessPartner;
 import sales.management.system.dummy_dto.Item;
 import sales.management.system.dummy_dto.ItemDto;
 import sales.management.system.dummy_dto.Unit;
@@ -17,6 +22,7 @@ import sales.management.system.dummy_dto.Unit;
 public class DummyController {
 	
 	public static final ItemDto dto = new ItemDto();
+	public static final List<BussinessPartner> partners = new ArrayList<BussinessPartner>();
 	
 	@PostConstruct
 	public void initData() {
@@ -41,6 +47,10 @@ public class DummyController {
 		 
 		 dto.setItems(Arrays.asList(i1, i2, i3)); dto.setError(false); dto.setMessage("asf");
 		 
+		 BussinessPartner partner1 = new BussinessPartner();
+		 partner1.setId(1); partner1.setAddress("Trg Dositeja Obradovica 4"); partner1.setEmail("comapany.it@gmail.com"); partner1.setName("Fakultet Company"); partner1.setPhone("0643752311"); partner1.setTaxNumber("123456678");
+		 
+		 partners.add(partner1);
 	}
 	
 	@RequestMapping(value = "dummy/items", method = RequestMethod.GET)
@@ -48,5 +58,22 @@ public class DummyController {
 		return dto;
 	}
 	
+	@RequestMapping(value = "dummy/partners", method = RequestMethod.GET)
+	public List<BussinessPartner> getPartners() {
+		return partners;
+	}
+	
+	@RequestMapping(value = "dummy/partner", method = RequestMethod.POST)
+	public BussinessPartner addPartner(@RequestBody BussinessPartner newPartenr) {
+		//save to database
+		int id = partners.stream()
+			      .mapToInt(m -> m.getId())
+			      .max().orElseThrow(NoSuchElementException::new);
+		
+		newPartenr.setId(id);
+		partners.add(newPartenr);
+		System.out.println(partners.size());
+		return newPartenr;
+	}
 	
 }
