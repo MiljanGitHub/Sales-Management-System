@@ -1,7 +1,6 @@
 package sales.management.system.model;
 
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -31,7 +30,7 @@ public class Pricelist {
 	private int id;
 
 	@Column(nullable = false)
-	private LocalDateTime validFrom;
+	private String validFrom;
 
 	@ManyToOne
 	@JoinColumn(name="company_id")

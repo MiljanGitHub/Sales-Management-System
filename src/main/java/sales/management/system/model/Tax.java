@@ -1,6 +1,5 @@
 package sales.management.system.model;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -31,7 +30,7 @@ public class Tax {
 	private double percentage;
 
 	@Column(nullable = false)
-	private LocalDate validFrom;
+	private String validFrom;
 	
 	@OneToMany(mappedBy = "tax")
 	private Set<CommodityGroupe> commodityGroups;

@@ -1,7 +1,6 @@
 package sales.management.system.model;
 
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,10 +35,10 @@ public class Invoice {
 	private int invoiceNumber;
 
 	@Column(nullable = false)
-	private LocalDateTime invoiceDate;
+	private String invoiceDate;
 
 	@Column(nullable = false)
-	private LocalDateTime currencyDate;
+	private String currencyDate;
 
 	@Column(nullable = false,precision = 2,length = 15)
 	private double basisTotal;
