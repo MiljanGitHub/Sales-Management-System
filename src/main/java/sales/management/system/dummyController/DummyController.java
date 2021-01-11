@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sales.management.system.dummy_dto.BussinessPartner;
 import sales.management.system.dummy_dto.Item;
 import sales.management.system.dummy_dto.ItemDto;
+import sales.management.system.dummy_dto.OrderRequest;
 import sales.management.system.dummy_dto.Unit;
 
 @RestController
@@ -74,6 +75,16 @@ public class DummyController {
 		partners.add(newPartenr);
 		System.out.println(partners.size());
 		return newPartenr;
+	}
+	
+	@RequestMapping(value = "dummy/order", method = RequestMethod.POST)
+	public void createOrder(@RequestBody List<OrderRequest> order) {
+		
+		OrderRequest or = order.get(0);
+		
+		System.out.println("item id: " + or.getItemId());
+		System.out.println("amount id: " + or.getAmount());
+		return ;
 	}
 	
 }
