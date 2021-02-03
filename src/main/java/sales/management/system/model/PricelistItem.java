@@ -34,13 +34,16 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 @SqlResultSetMappings({ //
-	
+
 
 	@SqlResultSetMapping(name = "findPricelistItemsMapping",
 			classes = {@ConstructorResult(targetClass=sales.management.system.dto.RawPricelistItem.class,
-			columns = {@ColumnResult(name="pricelistItemId", type=Integer.class),
+			columns = {@ColumnResult(name="commodityId", type=Integer.class),
+					   @ColumnResult(name="commodityName", type=String.class),
+					   @ColumnResult(name="unitId", type=Integer.class),
+					   @ColumnResult(name="unitShortNam", type=String.class),
+					   @ColumnResult(name="unitLongName", type=String.class),
 					   @ColumnResult(name="price", type=Double.class),
-					   @ColumnResult(name="commodityId", type=Integer.class),
 			})} )
 	 })
 @NamedNativeQueries(value = {
