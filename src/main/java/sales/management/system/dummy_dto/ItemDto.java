@@ -15,6 +15,7 @@ public class ItemDto {
 	private String message;
 	private boolean error;
 	private List<Item> items;
+	
 	public String getMessage() {
 		return message;
 	}

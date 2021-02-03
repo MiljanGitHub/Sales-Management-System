@@ -1,13 +1,12 @@
 package sales.management.system.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -32,7 +31,9 @@ public class Tax {
 	@Column(nullable = false)
 	private String validFrom;
 	
-	@OneToMany(mappedBy = "tax")
-	private Set<CommodityGroupe> commodityGroups;
+	//@OneToMany(mappedBy = "tax")
+	@ManyToOne
+	@JoinColumn(name="commodity_groupe_id")
+	private CommodityGroupe commodityGroup;
 
 }

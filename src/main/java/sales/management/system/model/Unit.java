@@ -1,5 +1,6 @@
 package sales.management.system.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,12 +14,14 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity(name = "Unit")
 @Table(name = "unit")
 @NoArgsConstructor
 @Data
 @Setter
+@SuperBuilder
 public class Unit {
 	
 	@Id
@@ -33,5 +36,5 @@ public class Unit {
 	private String shortName;
 	
 	@OneToMany(mappedBy = "unit")
-	private Set<Commodity> commodities;
+	private Set<PricelistItem> pricelistItems = new HashSet<PricelistItem>();
 }

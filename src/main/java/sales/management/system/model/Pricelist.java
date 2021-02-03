@@ -1,6 +1,7 @@
 package sales.management.system.model;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -36,7 +37,12 @@ public class Pricelist {
 	@JoinColumn(name="company_id")
 	private Company company;
 	
-	@OneToMany(mappedBy = "commodity")
-	private Set<PricelistItem> priceListItems;
+//	@OneToMany(mappedBy = "commodity")
+//	private Set<PricelistItem> priceListItems;
+	
+	
+	@ManyToMany(mappedBy = "pricelists")
+	Set<PricelistItem> pricelistItems = new HashSet<>();
+	
 
 }

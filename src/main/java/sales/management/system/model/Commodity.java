@@ -15,11 +15,13 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity(name = "Commodity")
 @Table(name = "commodity")
 @NoArgsConstructor
 @Data
+@SuperBuilder
 @Setter
 public class Commodity {
 	
@@ -34,22 +36,22 @@ public class Commodity {
 	@Column(nullable = false,length = 100)
 	private String description;
 
-	@Column(nullable = false,length = 100)
+	@Column(name = "goods", nullable = true)
 	private boolean goods;  // goods or service
 
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
 	
+	@ManyToOne
+	@JoinColumn(name="unit_id")
+	private Unit unit;
+	
 	@OneToMany(mappedBy = "commodity")
 	private Set<Item> items;
 	
 	@OneToMany(mappedBy = "commodity")
 	private Set<PricelistItem> pricelistItems;
-	
-	@ManyToOne
-	@JoinColumn(name="unit_id")
-	private Unit unit;
 	
 	@ManyToOne
 	@JoinColumn(name="commodity_group_id")

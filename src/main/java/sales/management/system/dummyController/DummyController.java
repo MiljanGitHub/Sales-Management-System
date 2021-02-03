@@ -27,7 +27,9 @@ public class DummyController {
 	
 	@PostConstruct
 	public void initData() {
-		
+		/*
+		 * Initialize Units and Items.    
+		 */
 		 Unit u1 = new Unit();
 		 u1.setName("kilogram"); u1.setAbbreviation("kg"); u1.setId(1);
 		 
@@ -52,6 +54,10 @@ public class DummyController {
 		 partner1.setId(1); partner1.setAddress("Trg Dositeja Obradovica 4"); partner1.setEmail("comapany.it@gmail.com"); partner1.setName("Fakultet Company"); partner1.setPhone("0643752311"); partner1.setTaxNumber("123456678");
 		 
 		 partners.add(partner1);
+		 
+		 /*
+		  * Initialize price-lists.    
+		 */
 	}
 	
 	@RequestMapping(value = "dummy/items", method = RequestMethod.GET)

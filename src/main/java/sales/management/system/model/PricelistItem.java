@@ -1,23 +1,65 @@
 package sales.management.system.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
+
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity(name = "PricelistItem")
 @Table(name = "pricelist_item")
 @NoArgsConstructor
 @Data
 @Setter
+@SuperBuilder
+@SqlResultSetMappings({ //
+	
+
+	@SqlResultSetMapping(name = "findPricelistItemsMapping",
+			classes = {@ConstructorResult(targetClass=sales.management.system.dto.RawPricelistItem.class,
+			columns = {@ColumnResult(name="pricelistItemId", type=Integer.class),
+					   @ColumnResult(name="price", type=Double.class),
+					   @ColumnResult(name="commodityId", type=Integer.class),
+			})} )
+	 })
+@NamedNativeQueries(value = {
+		
+		@NamedNativeQuery(name = "findPricelistItems", query = ""
+				+ " SELECT commodity.commodity_id AS commodityId, commodity.name AS commodityName, u.unit_id AS unitId, u.short_name AS unitShortNam, u.name AS unitLongName, pricelistItem.price AS price "
+				+ " FROM pricelist_item_pricelist pricelist_pricelistItem "
+				+ " JOIN pricelist_item pricelistItem ON (pricelist_pricelistItem.pricelist_item_id = pricelistItem.pricelistitem_id) "
+				+ " JOIN commodity commodity ON (pricelistItem.commodity_id = commodity.commodity_id) "
+				+ " JOIN unit u ON (pricelistItem.unit_id = u.unit_id) "
+				+ " WHERE pricelist_pricelistItem.pricelist_id = (SELECT MAX(pricelist_id) "
+				+ " 								              FROM pricelist cenovnik "
+				+ " 											  WHERE cenovnik.valid_from IN (SELECT MAX(cenovnik.valid_from) "
+				+ "							  													FROM pricelist cenovnik "
+				+ "							  													WHERE (cenovnik.valid_from + 0) <= :requestedTime) "
+				+ ") "
+				, resultSetMapping = "findPricelistItemsMapping")
+
+	 })
 public class PricelistItem {
 	
 	@Id
@@ -33,7 +75,15 @@ public class PricelistItem {
 	private Commodity commodity;
 	
 	@ManyToOne
-	@JoinColumn(name="pricelist_id")
-	private Pricelist pricelist;
+	@JoinColumn(name="unit_id")
+	private Unit unit;
+	
+	@ManyToMany(cascade = { CascadeType.ALL })
+	    @JoinTable(
+	        name = "pricelistItem_pricelist", 
+	        joinColumns = { @JoinColumn(name = "pricelistItem_id") }, 
+	        inverseJoinColumns = { @JoinColumn(name = "pricelist_id") }
+	    )
+	Set<Pricelist> pricelists = new HashSet<>();
 
 }

@@ -38,8 +38,8 @@ public class CommodityGroupe {
 	@OneToMany(mappedBy = "commodityGroupe")
 	private Set<Commodity> commodities;
 	
-	@ManyToOne
-	@JoinColumn(name="tax_id")
-	private Tax tax;
+
+	@OneToMany(mappedBy = "commodityGroup")
+	private Set<Tax> taxes;
 
 }
