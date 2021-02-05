@@ -10,7 +10,7 @@ public class PricelistItemDto {
 	
 	public PricelistItemDto(RawPricelistItem rawPricelistItem) {
 		this.unitId = rawPricelistItem.getUnitId();
-		this.unitShortName = rawPricelistItem.getUnitShortNam();
+		this.unitShortName = rawPricelistItem.getUnitShortName();
 		this.unitLongName = rawPricelistItem.getUnitLongName();
 		this.price = rawPricelistItem.getPrice();
 	}

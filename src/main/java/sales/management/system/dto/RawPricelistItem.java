@@ -3,30 +3,32 @@ package sales.management.system.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 
 @NoArgsConstructor
 @Data
 @Setter
+@SuperBuilder
 public class RawPricelistItem {
 	
 
 	private int unitId;
-	private String unitShortNam;
+	private String unitShortName;
 	private String unitLongName;
 	private double price;
 	private CommodityKey commodityKey;
 	
 	
 	
-	public RawPricelistItem(int commodityId, String commodityName, int unitId, String unitShortNam, String unitLongName, double price) {
+	public RawPricelistItem(int commodityId, String commodityName, int commodityGroupId, int unitId, String unitShortName, String unitLongName, double price) {
 		super();
 
 		this.unitId = unitId;
-		this.unitShortNam = unitShortNam;
+		this.unitShortName = unitShortName;
 		this.unitLongName = unitLongName;
 		this.price = price;
-		this.commodityKey = new CommodityKey(commodityId, commodityName);
+		this.commodityKey = new CommodityKey(commodityId, commodityName, commodityGroupId);
 	}
 
 
@@ -41,16 +43,14 @@ public class RawPricelistItem {
 		this.unitId = unitId;
 	}
 
-
-
-	public String getUnitShortNam() {
-		return unitShortNam;
+	public String getUnitShortName() {
+		return unitShortName;
 	}
 
 
 
-	public void setUnitShortNam(String unitShortNam) {
-		this.unitShortNam = unitShortNam;
+	public void setUnitShortName(String unitShortName) {
+		this.unitShortName = unitShortName;
 	}
 
 
