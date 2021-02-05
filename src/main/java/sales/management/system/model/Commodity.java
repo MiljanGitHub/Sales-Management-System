@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -37,7 +38,7 @@ public class Commodity {
 	private String description;
 
 	@Column(name = "goods", nullable = true)
-	private boolean goods;  // goods or service
+	private boolean goods;  // goods or service true for goods ?
 
 	@ManyToOne
 	@JoinColumn(name="company_id")
