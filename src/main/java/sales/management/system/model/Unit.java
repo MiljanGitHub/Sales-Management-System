@@ -35,6 +35,6 @@ public class Unit {
 	@Column(nullable = false,length = 10)
 	private String shortName;
 	
-	@OneToMany(mappedBy = "unit")
-	private Set<PricelistItem> pricelistItems = new HashSet<PricelistItem>();
+//	@OneToMany(mappedBy = "unit")
+//	private Set<PricelistItem> pricelistItems = new HashSet<PricelistItem>();
 }

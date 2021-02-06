@@ -23,16 +23,12 @@ import javax.persistence.ConstructorResult;
 
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Entity(name = "PricelistItem")
-@Table(name = "pricelist_item")
-@NoArgsConstructor
-@Data
-@Setter
-@SuperBuilder
+
 @SqlResultSetMappings({ //
 
 
@@ -64,6 +60,12 @@ import lombok.experimental.SuperBuilder;
 				, resultSetMapping = "findPricelistItemsMapping")
 
 	 })
+@Entity(name = "PricelistItem")
+@Table(name = "pricelist_item")
+@NoArgsConstructor
+@Getter
+@Setter
+@SuperBuilder
 public class PricelistItem {
 	
 	@Id
@@ -78,14 +80,14 @@ public class PricelistItem {
 	@JoinColumn(name="commodity_id")
 	private Commodity commodity;
 	
-	@ManyToOne
-	@JoinColumn(name="unit_id")
-	private Unit unit;
+//	@ManyToOne
+//	@JoinColumn(name="unit_id")
+//	private Unit unit;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	    @JoinTable(
-	        name = "pricelistItem_pricelist", 
-	        joinColumns = { @JoinColumn(name = "pricelistItem_id") }, 
+	        name = "pricelistItem_pricelist",
+	        joinColumns = { @JoinColumn(name = "pricelistItem_id") },
 	        inverseJoinColumns = { @JoinColumn(name = "pricelist_id") }
 	    )
 	Set<Pricelist> pricelists = new HashSet<>();
