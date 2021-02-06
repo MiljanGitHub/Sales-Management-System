@@ -29,6 +29,7 @@ public class ComodityController {
         for (Commodity commodity : comodities) {
             commodityDtos.add(new CommodityDto(commodity));
         }
+
         return new ResponseEntity<List<CommodityDto>>(commodityDtos, HttpStatus.OK);
     }
 

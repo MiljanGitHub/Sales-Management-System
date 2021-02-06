@@ -36,4 +36,5 @@ public class Unit {
 	
 	@OneToMany(mappedBy = "unit")
 	private Set<PricelistItem> pricelistItems;
+
 }

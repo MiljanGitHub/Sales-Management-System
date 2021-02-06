@@ -11,13 +11,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "Company")
 @Table(name = "company")
 @NoArgsConstructor
-@Data
+@Getter
 @Setter
 public class Company {
 	

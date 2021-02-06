@@ -2,15 +2,7 @@ package sales.management.system.model;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 import lombok.Getter;
@@ -22,9 +14,9 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "commodity")
 @NoArgsConstructor
 @Data
-@Getter
 @SuperBuilder
 @Setter
+@Getter
 public class Commodity {
 	
 	@Id
@@ -59,6 +51,4 @@ public class Commodity {
 	@JoinColumn(name="commodity_group_id")
 	private CommodityGroupe commodityGroupe;
 	
-
-
 }
