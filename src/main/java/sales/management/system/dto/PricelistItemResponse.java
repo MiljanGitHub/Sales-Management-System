@@ -4,10 +4,11 @@ import java.util.List;
 
 public class PricelistItemResponse {
 	
+	private List<ItemDto> items;
 	public String message;
 	public int code;
 	public boolean error;
-	private List<ItemDto> items;
+	
 	
 	
 	public String getMessage() {

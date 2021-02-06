@@ -1,6 +1,5 @@
 package sales.management.system.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,5 +35,5 @@ public class Unit {
 	private String shortName;
 	
 	@OneToMany(mappedBy = "unit")
-	private Set<PricelistItem> pricelistItems = new HashSet<PricelistItem>();
+	private Set<PricelistItem> pricelistItems;
 }

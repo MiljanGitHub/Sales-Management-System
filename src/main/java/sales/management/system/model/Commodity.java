@@ -22,6 +22,7 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "commodity")
 @NoArgsConstructor
 @Data
+@Getter
 @SuperBuilder
 @Setter
 public class Commodity {
@@ -57,5 +58,7 @@ public class Commodity {
 	@ManyToOne
 	@JoinColumn(name="commodity_group_id")
 	private CommodityGroupe commodityGroupe;
+	
+
 
 }

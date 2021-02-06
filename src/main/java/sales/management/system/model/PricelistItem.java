@@ -1,10 +1,11 @@
 package sales.management.system.model;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,12 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-import javax.persistence.Table;
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
-import javax.persistence.ColumnResult;
-import javax.persistence.ConstructorResult;
-
+import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -88,6 +86,6 @@ public class PricelistItem {
 	        joinColumns = { @JoinColumn(name = "pricelistItem_id") }, 
 	        inverseJoinColumns = { @JoinColumn(name = "pricelist_id") }
 	    )
-	Set<Pricelist> pricelists = new HashSet<>();
+	Set<Pricelist> pricelists;
 
 }

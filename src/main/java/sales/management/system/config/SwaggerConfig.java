@@ -49,11 +49,8 @@ public class SwaggerConfig {
     
     private ApiInfo metaData() {
         return new ApiInfoBuilder()
-                .title("Spring Boot REST API - Fleaty App")
-                .description("*<b>To authenticate yourself do the following:</b>*\n"
-                		+ "1. Use the POST /fleaty/login endpoint. Include your email and password in the body. Push token needs to be null.\n"
-                		+ "2. Save the token value you get in response.\n"
-                		+ "3. For API calls, use the token value in a HTTP request header as follows: \"Bearer [token value]\". For Swagger you use the Authorize button and insert \"Bearer [token value]\" in the text input.")
+                .title("Spring Boot REST API - Sales Management System App")
+                .description("*<b>Back-end appliction with exposed API endpoints</b>*\n")
                 .version("1.0.0")
                 .license("Apache License Version 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")

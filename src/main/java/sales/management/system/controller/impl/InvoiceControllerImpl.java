@@ -36,7 +36,7 @@ public class InvoiceControllerImpl {
 		PricelistItemResponse response = new PricelistItemResponse();
 		
 		List<RawPricelistItem> rawPricelistItems = pricelistItemService.findPricelistItems(Long.valueOf(requestedTime)); // 18 jan ->
-		//PROVERITI ako je list prazna znaci da za izabrani datum
+
 		if (!rawPricelistItems.isEmpty()){
 				
 			Map<CommodityKey, List<RawPricelistItem>> groupedRawPricelistItems = rawPricelistItems.stream()
