@@ -1,7 +1,7 @@
 package sales.management.system.service;
-import sales.management.system.model.Commodity;
-
 import java.util.List;
+
+import sales.management.system.model.Commodity;
 
 public interface CommodityService {
 

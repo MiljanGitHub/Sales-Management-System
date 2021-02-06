@@ -1,22 +1,19 @@
 package sales.management.system.service.impl;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import sales.management.system.dtoRequest.PriceListItemDTORequest;
-import sales.management.system.model.Commodity;
-import sales.management.system.model.Company;
 import sales.management.system.model.Pricelist;
 import sales.management.system.model.PricelistItem;
 import sales.management.system.repository.CopmanyRepository;
 import sales.management.system.repository.PricelistRepository;
 import sales.management.system.service.PricelistItemService;
 import sales.management.system.service.PricelistService;
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Service
 public class PricelistServiceImpl implements PricelistService{

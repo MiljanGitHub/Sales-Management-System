@@ -1,4 +1,4 @@
-package sales.management.system.dto;
+package sales.management.system.dtoResponse;
 
 public class CommodityKey {
 	

@@ -2,7 +2,7 @@ package sales.management.system.service;
 
 import java.util.List;
 
-import sales.management.system.dto.RawPricelistItem;
+import sales.management.system.dtoResponse.RawPricelistItem;
 import sales.management.system.model.Pricelist;
 import sales.management.system.model.PricelistItem;
 

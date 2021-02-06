@@ -1,7 +1,5 @@
 package sales.management.system.dtoRequest;
 
-import java.util.List;
-
 public class PriceListItemDTORequest {
         private int id;
         private String name;

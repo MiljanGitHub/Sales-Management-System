@@ -20,7 +20,6 @@ import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +30,7 @@ import lombok.experimental.SuperBuilder;
 
 
 	@SqlResultSetMapping(name = "findPricelistItemsMapping",
-			classes = {@ConstructorResult(targetClass=sales.management.system.dto.RawPricelistItem.class,
+			classes = {@ConstructorResult(targetClass=sales.management.system.dtoResponse.RawPricelistItem.class,
 			columns = {@ColumnResult(name="commodityId", type=Integer.class),
 					   @ColumnResult(name="commodityName", type=String.class), 
 					   @ColumnResult(name="commodityGroupId", type=Integer.class),
@@ -78,9 +77,9 @@ public class PricelistItem {
 	@JoinColumn(name="commodity_id")
 	private Commodity commodity;
 	
-//	@ManyToOne
-//	@JoinColumn(name="unit_id")
-//	private Unit unit;
+	@ManyToOne
+	@JoinColumn(name="unit_id")
+	private Unit unit;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	    @JoinTable(

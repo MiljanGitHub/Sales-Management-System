@@ -1,18 +1,19 @@
 package sales.management.system.controller;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sales.management.system.dto.CommodityDto;
+
+import sales.management.system.dtoResponse.CommodityDto;
 import sales.management.system.model.Commodity;
 import sales.management.system.service.CommodityService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("comodities/")

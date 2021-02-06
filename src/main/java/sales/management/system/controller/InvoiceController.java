@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import sales.management.system.controller.impl.InvoiceControllerImpl;
-import sales.management.system.dto.PricelistItemResponse;
+import sales.management.system.dtoResponse.PricelistItemResponse;
+
 
 @RestController
 @RequestMapping("invoice/")

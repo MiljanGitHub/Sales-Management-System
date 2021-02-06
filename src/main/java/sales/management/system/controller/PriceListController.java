@@ -7,13 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import sales.management.system.dtoRequest.PriceListDTORequest;
-import sales.management.system.dtoRequest.PriceListItemDTORequest;
-import sales.management.system.model.Commodity;
 import sales.management.system.repository.CommodityRepository;
 import sales.management.system.service.PricelistService;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("priceList/")

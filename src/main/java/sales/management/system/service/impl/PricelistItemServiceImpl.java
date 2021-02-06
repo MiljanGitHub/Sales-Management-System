@@ -1,7 +1,6 @@
 package sales.management.system.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -10,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import sales.management.system.dto.RawPricelistItem;
+import sales.management.system.dtoResponse.RawPricelistItem;
 import sales.management.system.model.Commodity;
 import sales.management.system.model.Pricelist;
 import sales.management.system.model.PricelistItem;

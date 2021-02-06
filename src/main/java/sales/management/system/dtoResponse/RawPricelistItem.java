@@ -1,4 +1,4 @@
-package sales.management.system.dto;
+package sales.management.system.dtoResponse;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
