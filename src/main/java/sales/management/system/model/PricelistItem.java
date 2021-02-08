@@ -32,7 +32,8 @@ import lombok.experimental.SuperBuilder;
 	@SqlResultSetMapping(name = "findPricelistItemsMapping",
 			classes = {@ConstructorResult(targetClass=sales.management.system.dtoResponse.RawPricelistItem.class,
 			columns = {@ColumnResult(name="commodityId", type=Integer.class),
-					   @ColumnResult(name="commodityName", type=String.class), 
+					   @ColumnResult(name="commodityName", type=String.class),
+					   @ColumnResult(name="commodityDescription", type=String.class), 
 					   @ColumnResult(name="commodityGroupId", type=Integer.class),
 					   @ColumnResult(name="unitId", type=Integer.class),
 					   @ColumnResult(name="unitShortName", type=String.class),
@@ -43,7 +44,7 @@ import lombok.experimental.SuperBuilder;
 @NamedNativeQueries(value = {
 		
 		@NamedNativeQuery(name = "findPricelistItems", query = ""
-				+ " SELECT commodity.commodity_id AS commodityId, commodity.name AS commodityName, commodity.commodity_group_id AS commodityGroupId, u.unit_id AS unitId, u.short_name AS unitShortName, u.name AS unitLongName, pricelistItem.price AS price "
+				+ " SELECT commodity.commodity_id AS commodityId, commodity.name AS commodityName, commodity.description AS commodityDescription, commodity.commodity_group_id AS commodityGroupId, u.unit_id AS unitId, u.short_name AS unitShortName, u.name AS unitLongName, pricelistItem.price AS price "
 				+ " FROM pricelist_item_pricelist pricelist_pricelistItem "
 				+ " JOIN pricelist_item pricelistItem ON (pricelist_pricelistItem.pricelist_item_id = pricelistItem.pricelistitem_id) "
 				+ " JOIN commodity commodity ON (pricelistItem.commodity_id = commodity.commodity_id) "
