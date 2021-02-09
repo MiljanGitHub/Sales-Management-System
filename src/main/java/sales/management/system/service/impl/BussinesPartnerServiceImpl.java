@@ -21,6 +21,7 @@ public class BussinesPartnerServiceImpl implements BussinesPartnerService{
 	@Override
 	public BussinesPartner findById(int bussinesPartnerId) {
 		return repository.getOne(bussinesPartnerId);
+
 	}
 	
 }

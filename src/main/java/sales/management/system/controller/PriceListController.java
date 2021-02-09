@@ -10,16 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
 import sales.management.system.dtoRequest.PriceListCopyDto;
 import sales.management.system.dtoRequest.PriceListDTORequest;
 import sales.management.system.dtoResponse.CommodityDto;
 import sales.management.system.dtoResponse.DataForPriceListCopyDto;
-=======
 import sales.management.system.controller.impl.PriceListControllerImpl;
 import sales.management.system.dtoRequest.PriceListDTORequest;
 import sales.management.system.dtoResponse.PricelistItemResponse;
->>>>>>> e5e09d8fd82f56d1188c06aef97ee7855e4cf953
 import sales.management.system.repository.CommodityRepository;
 import sales.management.system.service.PricelistService;
 

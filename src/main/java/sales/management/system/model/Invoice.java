@@ -54,7 +54,7 @@ public class Invoice {
 	@Column(nullable = false,precision = 2,length = 15)
 	private double totalAmmount;
 
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = false)
 	private EInvoiceStatus status;
 

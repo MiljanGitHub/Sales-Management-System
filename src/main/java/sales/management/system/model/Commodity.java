@@ -49,8 +49,8 @@ public class Commodity {
 	@JoinColumn(name="unit_id")
 	private Unit unit;
 	
-	//@OneToMany(mappedBy = "commodity")
-	//private Set<InvoiceItem> items;
+	@OneToMany(mappedBy = "commodity")
+	private Set<InvoiceItem> items;
 	
 	@OneToMany(mappedBy = "commodity")
 	private Set<PricelistItem> pricelistItems;

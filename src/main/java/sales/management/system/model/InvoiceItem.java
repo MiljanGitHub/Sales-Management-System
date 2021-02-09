@@ -53,9 +53,9 @@ public class InvoiceItem {
 	@JoinColumn(name="invoice_id")
 	private Invoice invoice;
 	
-//	@ManyToOne
-//	@JoinColumn(name="commodity_id")
-//	private Commodity commodity;
+	@ManyToOne
+	@JoinColumn(name="commodity_id")
+	private Commodity commodity;
 	
 	public InvoiceItem(OrderItem item, Invoice newInvoice) {
 		this.invoice = newInvoice;
