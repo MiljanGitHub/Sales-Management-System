@@ -1,13 +1,14 @@
 package sales.management.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import sales.management.system.controller.impl.InvoiceControllerImpl;
-import sales.management.system.dtoResponse.PricelistItemResponse;
+import sales.management.system.dtoRequest.NewOrderRequest;
+import sales.management.system.dtoResponse.StringResponse;
 
 
 @RestController
@@ -15,12 +16,12 @@ import sales.management.system.dtoResponse.PricelistItemResponse;
 public class InvoiceController {
 	
 	@Autowired
-	InvoiceControllerImpl invoiceControllerImpl;
+	private InvoiceControllerImpl invoiceControllerImpl;
 	
-	@RequestMapping(value = "pricelistItems/{requestedTime}", method = RequestMethod.GET) 
-	public PricelistItemResponse getPricelistItems(@PathVariable String requestedTime) {
+	@PostMapping(value = "create")
+	public StringResponse addNewInvoice(@RequestBody NewOrderRequest newOrder) {
 		
-		PricelistItemResponse response = invoiceControllerImpl.getPricelistItems(requestedTime);
+		StringResponse response = invoiceControllerImpl.addNewInvoice(newOrder);
 		
 		return response;
 	}

@@ -21,14 +21,14 @@ public class RawPricelistItem {
 	
 	
 	
-	public RawPricelistItem(int commodityId, String commodityName, int commodityGroupId, int unitId, String unitShortName, String unitLongName, double price) {
+	public RawPricelistItem(int commodityId, String commodityName, String commodityDescription, int commodityGroupId, int unitId, String unitShortName, String unitLongName, double price) {
 		super();
 
 		this.unitId = unitId;
 		this.unitShortName = unitShortName;
 		this.unitLongName = unitLongName;
 		this.price = price;
-		this.commodityKey = new CommodityKey(commodityId, commodityName, commodityGroupId);
+		this.commodityKey = new CommodityKey(commodityId, commodityName, commodityGroupId, commodityDescription);
 	}
 
 

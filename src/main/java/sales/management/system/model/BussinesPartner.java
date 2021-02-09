@@ -1,7 +1,7 @@
 package sales.management.system.model;
 
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -54,6 +54,12 @@ public class BussinesPartner {
 	private Company company;
 	
 	@OneToMany(mappedBy = "partner")
-	private Set<Invoice> invoices;
+	private List<Invoice> invoices;
+	
+
+	public void addInvoice(Invoice invoice) {
+		this.invoices.add(invoice);
+		invoice.setPartner(this);
+	}
 
 }

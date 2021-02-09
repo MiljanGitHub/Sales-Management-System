@@ -1,10 +1,13 @@
 package sales.management.system.model;
 
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sales.management.system.model.enums.EInvoiceStatus;
@@ -23,6 +27,7 @@ import sales.management.system.model.enums.EInvoiceStatus;
 @NoArgsConstructor
 @Data
 @Setter
+//@EqualsAndHashCode
 public class Invoice {
 	
 	
@@ -32,7 +37,7 @@ public class Invoice {
 	private int id;
 
 	@Column(nullable = false)
-	private int invoiceNumber;
+	private String invoiceNumber;
 
 	@Column(nullable = false)
 	private String invoiceDate;
@@ -49,6 +54,7 @@ public class Invoice {
 	@Column(nullable = false,precision = 2,length = 15)
 	private double totalAmmount;
 
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private EInvoiceStatus status;
 
@@ -59,15 +65,11 @@ public class Invoice {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="bussines_year_id")
-	private BussinesYear year;
-	
-	@ManyToOne
 	@JoinColumn(name="bussines_partner_id")
 	private BussinesPartner partner;
 	
 	
 	@OneToMany(mappedBy = "invoice")
-	private Set<Item> items;
+	private List<InvoiceItem> items;
 
 }
