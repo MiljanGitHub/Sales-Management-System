@@ -42,11 +42,14 @@ public class PricelistItemServiceImpl implements PricelistItemService{
 
 		Commodity commodity=commodityRepository.findById(ComodityId).get();
 		System.out.println("COMMMMMMMMM");
+
 		PricelistItem pricelistItem =new PricelistItem();
 		pricelistItem.setPrice(price);
+		System.out.println(pricelistItem.getPricelists());
+
 		pricelistItem.getPricelists().add(pricelist);// ovde je problem
 		pricelistItem.setCommodity(commodity);
-
+		pricelistItem.setUnit(commodity.getUnit());
 		return pricelistItem;
 	}
 

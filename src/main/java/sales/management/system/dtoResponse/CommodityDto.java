@@ -13,7 +13,7 @@ public class CommodityDto {
     public CommodityDto(Commodity commodity) {
         this.id = commodity.getId();
         this.name = commodity.getName();
-        this.type = ((commodity.isGoods() ? "comodity" : "service"));
+        this.type = ((commodity.isGoods() ? "commodity" : "service"));
     }
 
     public int getId() {

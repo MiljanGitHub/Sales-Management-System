@@ -13,4 +13,6 @@ public class PriceListDTORequest {
     public List<PriceListItemDTORequest> getPriceListItems() {
         return priceListItems;
     }
+
+    public PriceListDTORequest(){}
 }

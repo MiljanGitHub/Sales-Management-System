@@ -1,5 +1,6 @@
 package sales.management.system.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -87,6 +88,6 @@ public class PricelistItem {
 	        joinColumns = { @JoinColumn(name = "pricelistItem_id") },
 	        inverseJoinColumns = { @JoinColumn(name = "pricelist_id") }
 	    )
-	Set<Pricelist> pricelists;
+	Set<Pricelist> pricelists=new HashSet<>();
 
 }
