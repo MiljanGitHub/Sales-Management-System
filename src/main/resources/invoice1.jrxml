@@ -193,7 +193,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[NUMBER]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" positionType="Float" x="69" y="0" width="69" height="20" forecolor="#000000" uuid="546ffc95-f32d-4f2f-8204-b80e864b9102">
@@ -202,7 +202,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[ITEM]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" positionType="Float" x="138" y="0" width="69" height="20" forecolor="#000000" uuid="0589f243-1c48-423e-9613-ff53fae41feb">
@@ -211,7 +211,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[UNIT]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" positionType="Float" x="207" y="0" width="69" height="20" forecolor="#000000" uuid="9465e98c-231f-44a0-a052-3ea06212bccf">
@@ -220,7 +220,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[AMOUNT]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" positionType="Float" x="276" y="0" width="69" height="20" forecolor="#000000" uuid="a6fb2f15-a738-4e89-9cdc-4ad1d63a37b3">
@@ -229,7 +229,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[PRICE]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" positionType="Float" x="345" y="0" width="69" height="20" forecolor="#000000" uuid="34788d8c-9ac5-430b-b048-90d9282a3e86">
@@ -238,7 +238,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[TAX %]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" positionType="Float" x="414" y="0" width="69" height="20" forecolor="#000000" uuid="0e0f0510-b21e-4f89-94ef-d60d13564912">
@@ -247,7 +247,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[TAX]]></text>
             </staticText>
             <staticText>
                 <reportElement style="Column header" positionType="Float" x="483" y="0" width="69" height="20" forecolor="#000000" uuid="3d7c24ab-a418-4052-9b45-a167c67d9a67">
@@ -256,7 +256,7 @@
                 <textElement>
                     <font fontName="Arial" size="12" isBold="true"/>
                 </textElement>
-                <text><![CDATA[A]]></text>
+                <text><![CDATA[TOTAL]]></text>
             </staticText>
         </band>
     </columnHeader>
@@ -348,7 +348,7 @@
             </textField>
             <textField>
                 <reportElement x="465" y="160" width="100" height="20" uuid="380804fc-f619-412e-99fc-cbbead6b32c4"/>
-                <textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="365" y="120" width="100" height="20" uuid="506897fe-f2ba-4dbd-8e5e-e4f06b973115"/>
@@ -360,7 +360,7 @@
             </staticText>
             <staticText>
                 <reportElement x="365" y="160" width="100" height="20" uuid="ddc262b3-5a76-4868-b72a-e98d6357d332"/>
-                <text><![CDATA[Total ammount:]]></text>
+                <text><![CDATA[Total ammount: ]]></text>
             </staticText>
         </band>
     </lastPageFooter>
