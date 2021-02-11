@@ -1,4 +1,4 @@
-package sales.management.system.controller;
+package sales.management.system.dtoResponse;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import sales.management.system.dtoResponse.RawPricelistItem;
 
 @Data
 @Setter
@@ -16,7 +15,7 @@ import sales.management.system.dtoResponse.RawPricelistItem;
 @RequiredArgsConstructor
 public class PricelistItemResponse {
 	
-	List<RawPricelistItem> pricelistItems;
+	List<RawPricelistItem> commodities;
 	private String message;
 	private boolean error;
 	private int code;

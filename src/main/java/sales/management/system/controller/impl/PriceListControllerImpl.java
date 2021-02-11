@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-import sales.management.system.controller.PricelistItemResponse;
+import sales.management.system.dtoResponse.PricelistItemResponse;
 import sales.management.system.dtoResponse.RawPricelistItem;
 import sales.management.system.dtoResponse.RawTax;
 import sales.management.system.service.PricelistItemService;
@@ -44,16 +44,13 @@ public class PriceListControllerImpl {
 			});
 					
 			response.setCode(200);
-			response.setPricelistItems(rawPricelistItems);
+			response.setCommodities(rawPricelistItems);
 			response.setError(false);
-
 			response.setMessage(messageSource.getMessage("pricelist.items", null, new Locale("en")));
-
-	
 			
 		} else {
 			response.setCode(200);
-			response.setPricelistItems(null);
+			response.setCommodities(null);
 			response.setError(true);
 			response.setMessage(messageSource.getMessage("pricelist.items.empty", null, new Locale("en")));
 		}
