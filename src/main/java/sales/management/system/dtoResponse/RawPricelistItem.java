@@ -11,81 +11,27 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @SuperBuilder
 public class RawPricelistItem {
-	
 
+	private int commodityId;
+	private String description;
+	private String name;
 	private int unitId;
+	private String unitName;
 	private String unitShortName;
-	private String unitLongName;
 	private double price;
-	private CommodityKey commodityKey;
+	private int commodityGroupId;
+	private double tax;
 	
-	
-	
-	public RawPricelistItem(int commodityId, String commodityName, String commodityDescription, int commodityGroupId, int unitId, String unitShortName, String unitLongName, double price) {
+	public RawPricelistItem(int commodityId, String description, String name, int unitId, String unitName, String unitShortName, double price, int commodityGroupId) {
 		super();
-
+		this.commodityId = commodityId;
+		this.description = description;
+		this.name = name;
 		this.unitId = unitId;
+		this.unitName = unitName;
 		this.unitShortName = unitShortName;
-		this.unitLongName = unitLongName;
 		this.price = price;
-		this.commodityKey = new CommodityKey(commodityId, commodityName, commodityGroupId, commodityDescription);
-	}
-
-
-
-	public int getUnitId() {
-		return unitId;
-	}
-
-
-
-	public void setUnitId(int unitId) {
-		this.unitId = unitId;
-	}
-
-	public String getUnitShortName() {
-		return unitShortName;
-	}
-
-
-
-	public void setUnitShortName(String unitShortName) {
-		this.unitShortName = unitShortName;
-	}
-
-
-
-	public String getUnitLongName() {
-		return unitLongName;
-	}
-
-
-
-	public void setUnitLongName(String unitLongName) {
-		this.unitLongName = unitLongName;
-	}
-
-
-
-	public double getPrice() {
-		return price;
-	}
-
-
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-
-
-	public CommodityKey getCommodityKey() {
-		return commodityKey;
-	}
-
-
-	public void setCommodityKey(CommodityKey commodityKey) {
-		this.commodityKey = commodityKey;
+		this.commodityGroupId = commodityGroupId;
 	}
 	
 	

@@ -1,13 +1,10 @@
 package sales.management.system.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -34,7 +31,7 @@ public class Unit {
 	@Column(nullable = false,length = 10)
 	private String shortName;
 	
-	@OneToMany(mappedBy = "unit")
-	private Set<PricelistItem> pricelistItems;
+//	@OneToMany(mappedBy = "unit")
+//	private Set<PricelistItem> pricelistItems;
 
 }

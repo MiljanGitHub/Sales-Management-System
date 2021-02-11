@@ -29,33 +29,34 @@ import lombok.experimental.SuperBuilder;
 
 @SqlResultSetMappings({ //
 
-
 	@SqlResultSetMapping(name = "findPricelistItemsMapping",
 			classes = {@ConstructorResult(targetClass=sales.management.system.dtoResponse.RawPricelistItem.class,
 			columns = {@ColumnResult(name="commodityId", type=Integer.class),
-					   @ColumnResult(name="commodityName", type=String.class),
-					   @ColumnResult(name="commodityDescription", type=String.class), 
-					   @ColumnResult(name="commodityGroupId", type=Integer.class),
+					   @ColumnResult(name="description", type=String.class),
+					   @ColumnResult(name="name", type=String.class), 
 					   @ColumnResult(name="unitId", type=Integer.class),
+					   @ColumnResult(name="unitName", type=String.class),
 					   @ColumnResult(name="unitShortName", type=String.class),
-					   @ColumnResult(name="unitLongName", type=String.class),
 					   @ColumnResult(name="price", type=Double.class),
+					   @ColumnResult(name="commodityGroupId", type=Integer.class),
 			})} )
 	 })
 @NamedNativeQueries(value = {
 		
 		@NamedNativeQuery(name = "findPricelistItems", query = ""
-				+ " SELECT commodity.commodity_id AS commodityId, commodity.name AS commodityName, commodity.description AS commodityDescription, commodity.commodity_group_id AS commodityGroupId, u.unit_id AS unitId, u.short_name AS unitShortName, u.name AS unitLongName, pricelistItem.price AS price "
-				+ " FROM pricelist_item_pricelist pricelist_pricelistItem "
-				+ " JOIN pricelist_item pricelistItem ON (pricelist_pricelistItem.pricelist_item_id = pricelistItem.pricelistitem_id) "
-				+ " JOIN commodity commodity ON (pricelistItem.commodity_id = commodity.commodity_id) "
-				+ " JOIN unit u ON (pricelistItem.unit_id = u.unit_id) "
-				+ " WHERE pricelist_pricelistItem.pricelist_id = (SELECT MAX(pricelist_id) "
-				+ " 								              FROM pricelist cenovnik "
-				+ " 											  WHERE cenovnik.valid_from IN (SELECT MAX(cenovnik.valid_from) "
-				+ "							  													FROM pricelist cenovnik "
-				+ "							  													WHERE (cenovnik.valid_from + 0) <= :requestedTime) "
-				+ ") "
+				+ "SELECT comm.commodity_id AS commodityId, comm.description AS description, comm.name AS name, u.unit_id AS unitId, u.name AS unitName, u.short_name AS unitShortName, pli.price AS price, cg.commodity_groupe_id AS commodityGroupId "
+				+ "FROM pricelist_item pli "
+				+ "JOIN Commodity comm ON (comm.commodity_id = pli.commodity_id) "
+				+ "JOIN Unit u ON (u.unit_id = comm.unit_id ) "
+				+ "JOIN commodity_groupe cg ON (cg.commodity_groupe_id = comm.commodity_group_id) "
+				+ "WHERE pricelistitem_id IN (SELECT DISTINCT plip.pricelist_item_id "
+				+ "							  FROM pricelist_item_pricelist plip "
+				+ "                           WHERE plip.pricelist_id = (SELECT MAX(pricelist_id) "
+				+ "						      							 FROM pricelist cenovnik "
+				+ "						      							 WHERE cenovnik.valid_from IN (SELECT MAX(cenovnik.valid_from) "
+				+ "														    					       FROM pricelist cenovnik "
+				+ "								                            						   WHERE (cenovnik.valid_from + 0) <= :requestedTime)) "
+				+ ")"
 				, resultSetMapping = "findPricelistItemsMapping")
 
 	 })
@@ -79,9 +80,9 @@ public class PricelistItem {
 	@JoinColumn(name="commodity_id")
 	private Commodity commodity;
 	
-	@ManyToOne
-	@JoinColumn(name="unit_id")
-	private Unit unit;
+//	@ManyToOne
+//	@JoinColumn(name="unit_id")
+//	private Unit unit;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	    @JoinTable(

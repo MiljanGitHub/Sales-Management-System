@@ -49,7 +49,7 @@ public class PricelistItemServiceImpl implements PricelistItemService{
 
 		pricelistItem.getPricelists().add(pricelist);// ovde je problem
 		pricelistItem.setCommodity(commodity);
-		pricelistItem.setUnit(commodity.getUnit());
+		//pricelistItem.setUnit(commodity.getUnit());
 		return pricelistItem;
 	}
 

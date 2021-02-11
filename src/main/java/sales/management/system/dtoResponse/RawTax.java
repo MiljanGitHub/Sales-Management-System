@@ -1,25 +1,24 @@
 package sales.management.system.dtoResponse;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@Setter
+@SuperBuilder
+@NoArgsConstructor
 public class RawTax {
 	
-
-	private double taxRate;
+	private int commodityGroupId;
+	private double tax;
 	
-	public RawTax(double taxRate) {
+	public RawTax(int commodityGroupId, double tax) {
 		super();
-
-		this.taxRate = taxRate;
-	}
-
-
-	public double getTaxRate() {
-		return taxRate;
-	}
-
-	public void setTaxRate(double taxRate) {
-		this.taxRate = taxRate;
+		this.commodityGroupId = commodityGroupId;
+		this.tax = tax;
 	}
 	
 	
-
 }

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import sales.management.system.dtoResponse.RawTax;
 import sales.management.system.repository.TaxRepository;
 import sales.management.system.service.TaxService;
 
@@ -23,6 +24,11 @@ public class TaxServiceImpl implements TaxService{
 	public int findTaxForCommodityGroup(long requestedTime, int commodityGroupId) {
 		// TODO Auto-generated method stub
 		return repository.findTaxRateForCommodityGroup(requestedTime, commodityGroupId);
+	}
+
+	@Override
+	public RawTax findRawTaxValuesPerCommodityGroup(int commodityGroupId, long requestedTime) {
+		return repository.findRawTaxValuesPerCommodityGroup(commodityGroupId, requestedTime);
 	}
 
 }
