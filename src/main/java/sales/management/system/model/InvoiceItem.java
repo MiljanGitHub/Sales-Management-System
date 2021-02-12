@@ -57,8 +57,18 @@ public class InvoiceItem {
 	@JoinColumn(name="commodity_id")
 	private Commodity commodity;
 	
+	
 	public InvoiceItem(OrderItem item, Invoice newInvoice) {
 		this.invoice = newInvoice;
+		this.amount = item.getAmount();
+		this.basis = item.getAmount() * item.getUnitPrice();
+		this.unitPrice = item.getUnitPrice();
+		this.taxPercentage = item.getTaxPercentage();
+		this.taxAmount = item.getTaxAmount();
+		this.total = item.getTotal();
+	}
+	
+	public InvoiceItem(OrderItem item) {
 		this.amount = item.getAmount();
 		this.basis = item.getAmount() * item.getUnitPrice();
 		this.unitPrice = item.getUnitPrice();

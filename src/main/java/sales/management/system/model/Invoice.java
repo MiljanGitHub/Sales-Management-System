@@ -2,8 +2,8 @@ package sales.management.system.model;
 
 
 import java.util.List;
-import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sales.management.system.model.enums.EInvoiceStatus;
@@ -69,7 +68,13 @@ public class Invoice {
 	private BussinesPartner partner;
 	
 	
-	@OneToMany(mappedBy = "invoice")
+	@OneToMany(mappedBy = "invoice", cascade = CascadeType.ALL)
 	private List<InvoiceItem> items;
+	
+	public void addInvoiceItem(InvoiceItem item) {
+		item.setInvoice(this);
+		this.items.add(item);
+		
+	}
 
 }

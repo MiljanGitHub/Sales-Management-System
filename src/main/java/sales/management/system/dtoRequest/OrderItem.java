@@ -11,7 +11,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @RequiredArgsConstructor
 public class OrderItem {
-	
 
 	private int commodityId;
 	private int amount;

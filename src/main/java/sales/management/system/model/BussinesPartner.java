@@ -61,7 +61,7 @@ public class BussinesPartner {
 	
 
 	public void addInvoice(Invoice invoice) {
-		this.invoices.add(invoice);
+		//this.invoices.add(invoice);
 		invoice.setPartner(this);
 	}
 

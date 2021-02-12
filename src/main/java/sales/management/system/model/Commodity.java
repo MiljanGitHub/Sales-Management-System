@@ -1,5 +1,6 @@
 package sales.management.system.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -58,5 +59,10 @@ public class Commodity {
 	@ManyToOne
 	@JoinColumn(name="commodity_group_id")
 	private CommodityGroupe commodityGroupe;
+	
+	public void addInvoiceItem(InvoiceItem item) {
+		//this.items.add(item);
+		item.setCommodity(this);
+	}
 	
 }

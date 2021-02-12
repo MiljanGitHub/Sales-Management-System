@@ -14,9 +14,9 @@ import lombok.experimental.SuperBuilder;
 public class NewOrderRequest {
 	
 	private int bussinesPartnerId;
-	private double totalBasis;
-	private double totalTax;
-	private double total;
-	private List<OrderItem> orderItem;
+	private double totalBasis; //ukupna osnovica
+	private double taxAmount; //ukupno za porez
+	private double total; //total total
+	private List<OrderItem> items;
 
 }
