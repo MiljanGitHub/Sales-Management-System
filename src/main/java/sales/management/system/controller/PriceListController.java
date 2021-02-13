@@ -14,7 +14,9 @@ import sales.management.system.controller.impl.PriceListControllerImpl;
 import sales.management.system.dtoRequest.PriceListCopyDto;
 import sales.management.system.dtoRequest.PriceListDTORequest;
 import sales.management.system.dtoResponse.DataForPriceListCopyDto;
+import sales.management.system.dtoResponse.PricelistDetailResponse;
 import sales.management.system.dtoResponse.PricelistItemResponse;
+import sales.management.system.dtoResponse.PricelistResponse;
 import sales.management.system.repository.CommodityRepository;
 import sales.management.system.service.PricelistService;
 
@@ -44,7 +46,9 @@ public class PriceListController {
     }
     
     
-	
+    /*
+     * Service return price-list items and their associated date when Business Partner is creating new Order
+     */
 	@RequestMapping(value = "pricelistItems/{requestedTime}", method = RequestMethod.GET) 
 	public PricelistItemResponse getPricelistItems(@PathVariable String requestedTime) {
 		
@@ -66,6 +70,30 @@ public class PriceListController {
         }
         return ResponseEntity.ok(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
-
+    
+    
+    /*
+     * Service return price-lists with their valid-from dates as well as PK as an identifiers.
+     */
+	@RequestMapping(value = "", method = RequestMethod.GET) 
+	public PricelistResponse getPricelists() {
+		
+		PricelistResponse response = pricelistControllerImpl.getPricelists();
+		
+		return response;
+		
+	}
+    
+    /*
+     * Service return price-list items and their associated date for price-list overview
+     */
+	@RequestMapping(value = "details/{pricelistId}", method = RequestMethod.GET) 
+	public PricelistDetailResponse getPricelistsDetails(@PathVariable Integer pricelistId) {
+		
+		
+		PricelistDetailResponse response =  pricelistControllerImpl.getPricelistsDetails(pricelistId);
+		
+		
+		return response;
+	}
 }

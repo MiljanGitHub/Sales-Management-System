@@ -12,7 +12,10 @@ import sales.management.system.dtoRequest.PriceListCopyDto;
 import sales.management.system.dtoRequest.PriceListItemDTORequest;
 import sales.management.system.dtoResponse.CommodityDto;
 import sales.management.system.dtoResponse.DataForPriceListCopyDto;
+import sales.management.system.dtoResponse.PricelistDetailDto;
+import sales.management.system.dtoResponse.PricelistDto;
 import sales.management.system.model.Commodity;
+import sales.management.system.model.Company;
 import sales.management.system.model.Pricelist;
 import sales.management.system.model.PricelistItem;
 import sales.management.system.repository.CommodityRepository;
@@ -90,6 +93,21 @@ public class PricelistServiceImpl implements PricelistService{
             return null;
         }
     }
+
+	@Override
+	public List<PricelistDto> findPricelistDto(Company company) {
+		return pricelistRepository.findPricelistDto(company);
+	}
+
+	@Override
+	public List<PricelistDetailDto> findPricelistItemDetails(int pricelistId) {
+		return pricelistRepository.findPricelistItemDetails(pricelistId);
+	}
+
+	@Override
+	public Pricelist findById(int pricelistId) {
+		return pricelistRepository.getOne(pricelistId);
+	}
 
     
  
