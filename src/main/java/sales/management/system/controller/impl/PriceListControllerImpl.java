@@ -1,5 +1,8 @@
 package sales.management.system.controller.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -92,6 +95,16 @@ public class PriceListControllerImpl {
 		
 		List<PricelistDto> pricelistDtos = pricelistService.findPricelistDto(theOnlyCompanyInTheSystem);
 		
+
+		//setting date-time format of each DTO
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy.");
+		Calendar cal = Calendar.getInstance();
+
+		pricelistDtos.forEach(dto -> {
+			cal.setTimeInMillis(Long.valueOf(dto.getValidFrom()));
+			dto.setValidFrom(df.format(cal.getTime()));
+		});
+		
 		response.setCode(200);
 		response.setError(false);
 		response.setItems(pricelistDtos);
@@ -112,9 +125,10 @@ public class PriceListControllerImpl {
 			Pricelist pricelist = pricelistService.findById(pricelistId);
 			
 			Long requestedTime = Long.valueOf(pricelist.getValidFrom()); //time to look for Tax based on starting time of requested Price-list
-			
+
 			details.forEach(detail -> {
-				
+
+				//set tax rate
 				RawTax rt = taxService.findRawTaxValuesPerCommodityGroup(detail.getCommodityGroupId(), requestedTime);
 				
 				detail.setTaxRate(rt.getTax());
@@ -124,7 +138,7 @@ public class PriceListControllerImpl {
 		}
 		
 		response.setCode(200);
-		response.setError(true);
+		response.setError(false);
 		response.setDetails(details);
 		response.setMessage(messageSource.getMessage("pricelist.details", null, new Locale("en")));
 		
@@ -132,5 +146,6 @@ public class PriceListControllerImpl {
 		
 	}
 	
+
 	
 }

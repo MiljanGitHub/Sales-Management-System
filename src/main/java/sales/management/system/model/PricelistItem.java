@@ -24,7 +24,6 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
 
 @SqlResultSetMappings({ //
@@ -56,7 +55,8 @@ import lombok.experimental.SuperBuilder;
 				+ "						      							 WHERE cenovnik.valid_from IN (SELECT MAX(cenovnik.valid_from) "
 				+ "														    					       FROM pricelist cenovnik "
 				+ "								                            						   WHERE (cenovnik.valid_from + 0) <= :requestedTime)) "
-				+ ")"
+				+ "					         )"
+				+ "ORDER BY comm.name"
 				, resultSetMapping = "findPricelistItemsMapping")
 
 	 })
@@ -65,7 +65,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
 public class PricelistItem {
 	
 	@Id
@@ -90,6 +89,6 @@ public class PricelistItem {
 	        joinColumns = { @JoinColumn(name = "pricelistItem_id") },
 	        inverseJoinColumns = { @JoinColumn(name = "pricelist_id") }
 	    )
-	Set<Pricelist> pricelists=new HashSet<>();
+	Set<Pricelist> pricelists= new HashSet<>();
 
 }

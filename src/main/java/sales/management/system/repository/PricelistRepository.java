@@ -18,7 +18,7 @@ public interface PricelistRepository extends JpaRepository<Pricelist, Integer> {
 	/*
 	 * Using JQPL to fetch DTO
 	 */
-	@Query(value = "SELECT new sales.management.system.dtoResponse.PricelistDto(pricelist.id, pricelist.validFrom) FROM Pricelist pricelist WHERE pricelist.company = :company")
+	@Query(value = "SELECT new sales.management.system.dtoResponse.PricelistDto(pricelist.id, pricelist.validFrom) FROM Pricelist pricelist WHERE pricelist.company = :company ORDER BY pricelist.validFrom")
 	List<PricelistDto> findPricelistDto(@Param("company") Company company);
 	
 	@Query(name = "findPricelistItemDetails", nativeQuery = true)

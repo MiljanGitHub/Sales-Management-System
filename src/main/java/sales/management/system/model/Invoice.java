@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,7 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -26,7 +32,33 @@ import sales.management.system.model.enums.EInvoiceStatus;
 @NoArgsConstructor
 @Data
 @Setter
-//@EqualsAndHashCode
+@SqlResultSetMappings({ //
+
+	@SqlResultSetMapping(name = "findInvoicesByDateMapping",
+			
+			classes = {@ConstructorResult(targetClass=sales.management.system.dtoResponse.InvoiceDto.class,
+			columns = {@ColumnResult(name="id", type=Integer.class),
+					   @ColumnResult(name="invoiceNumber", type=String.class),
+					   @ColumnResult(name="invoiceDate", type=String.class), 
+					   @ColumnResult(name="basisTotal", type=Double.class),
+					   @ColumnResult(name="taxTotal", type=Double.class),
+					   @ColumnResult(name="totalAmmount", type=Double.class),
+					   @ColumnResult(name="status", type=String.class),
+					   @ColumnResult(name="bussinesPartner", type=String.class),
+					   @ColumnResult(name="urlJasperReport", type=String.class),
+	
+			})} )
+	 })
+@NamedNativeQueries(value = {
+		
+		@NamedNativeQuery(name = "findInvoicesByDate", query = ""
+				+ "SELECT i.invoice_id AS id, i.invoice_number AS invoiceNumber, i.invoice_date AS invoiceDate, i.basis_total AS basisTotal, i.tax_total AS taxTotal, i.total_ammount AS totalAmmount, i.status AS status, bp.name AS bussinesPartner, i.url AS urlJasperReport "
+				+ "FROM invoice i "
+				+ "JOIN bussines_partner bp ON (bp.bussines_partner_id = i.bussines_partner_id)"
+				+ "WHERE (i.invoice_date+0) >= :from AND (i.invoice_date+0) <= :to"
+				, resultSetMapping = "findInvoicesByDateMapping")
+
+	 })
 public class Invoice {
 	
 	
@@ -53,9 +85,12 @@ public class Invoice {
 	@Column(nullable = false,precision = 2,length = 15)
 	private double totalAmmount;
 
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private EInvoiceStatus status;
+	
+	@Column(nullable = true, columnDefinition = "VARCHAR(500)")
+	private String url;
 
 
 	@ManyToOne

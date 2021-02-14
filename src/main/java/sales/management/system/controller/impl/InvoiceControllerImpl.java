@@ -1,12 +1,28 @@
 package sales.management.system.controller.impl;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import io.minio.errors.ErrorResponseException;
+import io.minio.errors.InsufficientDataException;
+import io.minio.errors.InternalException;
+import io.minio.errors.InvalidResponseException;
+import io.minio.errors.ServerException;
+import io.minio.errors.XmlParserException;
 import sales.management.system.dtoRequest.NewOrderRequest;
+import sales.management.system.dtoResponse.InvoiceDto;
 import sales.management.system.dtoResponse.StringResponse;
+import sales.management.system.helper.JasperReportHelper;
 import sales.management.system.model.BussinesPartner;
 import sales.management.system.model.Commodity;
 import sales.management.system.model.Company;
@@ -33,7 +49,10 @@ public class InvoiceControllerImpl {
 	@Autowired
 	private CommodityService commodityService;
 	
-	public StringResponse addNewInvoice(NewOrderRequest request) {
+	@Autowired
+	private JasperReportHelper jasperHelper;
+	
+	public StringResponse addNewInvoice(NewOrderRequest request) throws InvalidKeyException, ServerException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, XmlParserException, ErrorResponseException, IOException {
 		
 		String message = null;
 		boolean error = false;
@@ -76,8 +95,42 @@ public class InvoiceControllerImpl {
 		if (newlySavedInvoice != null && newlySavedInvoice.getItems().size() == request.getItems().size()) {
 			message="successfully.invoice"; error = false;
 		} else message="error.invoice"; error = true;
+		
+		jasperHelper.generateJasperReport(newlySavedInvoice);
 
 		return new StringResponse(message, error, 200);
+	}
+	
+	public List<InvoiceDto> findInvoices(String fromDate, String toDate){
+		
+		long from = Long.valueOf(fromDate);
+		long to = Long.valueOf(toDate);
+
+		
+		List<InvoiceDto> invoicesDto = invoiceService.findInvoicesByDate(from, to);
+		
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy.");
+		Calendar cal = Calendar.getInstance();
+
+		invoicesDto.forEach(dto -> {
+			cal.setTimeInMillis(Long.valueOf(dto.getInvoiceDate()));
+			dto.setInvoiceDate(df.format(cal.getTime()));
+		});
+		
+		
+		return invoicesDto;
+		
+	}
+	
+	@Async
+	public void updateInvoiceStatus() {
+		
+		List<Invoice> invoices = invoiceService.findAll();
+		
+		invoices.forEach(invoice -> {
+			System.out.print("Go to external service and update status of Invoice");
+		});
+		
 	}
 	
 }

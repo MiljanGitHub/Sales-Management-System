@@ -34,7 +34,7 @@ public class PriceListController {
     private PriceListControllerImpl pricelistControllerImpl;
 
     @PostMapping(value = "create")
-    public ResponseEntity postController(@RequestBody PriceListDTORequest priceListDTORequest) {
+    public ResponseEntity<?> postController(@RequestBody PriceListDTORequest priceListDTORequest) {
         try{
 
             pricelistService.createNew(priceListDTORequest.getDate(),priceListDTORequest.getPriceListItems());
@@ -58,7 +58,7 @@ public class PriceListController {
 	}
 
     @PostMapping(value = "copy")
-    public ResponseEntity makeCopy(@RequestBody PriceListCopyDto priceListCopyDto) {
+    public ResponseEntity<?> makeCopy(@RequestBody PriceListCopyDto priceListCopyDto) {
         try{
             DataForPriceListCopyDto dataForCopy=pricelistService.makeCopy(priceListCopyDto);
 
@@ -90,9 +90,7 @@ public class PriceListController {
 	@RequestMapping(value = "details/{pricelistId}", method = RequestMethod.GET) 
 	public PricelistDetailResponse getPricelistsDetails(@PathVariable Integer pricelistId) {
 		
-		
 		PricelistDetailResponse response =  pricelistControllerImpl.getPricelistsDetails(pricelistId);
-		
 		
 		return response;
 	}

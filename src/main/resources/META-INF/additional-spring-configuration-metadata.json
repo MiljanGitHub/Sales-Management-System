@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "storage.minio.endpoint",
+    "type": "java.lang.String",
+    "description": "A description for 'storage.minio.endpoint'"
+  },
+  {
+    "name": "storage.minio.invoice-bucket",
+    "type": "java.lang.String",
+    "description": "A description for 'storage.minio.invoice-bucket'"
+  },
+  {
+    "name": "storage.minio.access-key",
+    "type": "java.lang.String",
+    "description": "A description for 'storage.minio.access-key'"
+  },
+  {
+    "name": "storage.minio.secret-key",
+    "type": "java.lang.String",
+    "description": "A description for 'storage.minio.secret-key'"
+  },
+  {
+    "name": "project.directory",
+    "type": "java.lang.String",
+    "description": "A description for 'project.directory'"
+  },
+  {
+    "name": "file.separtor",
+    "type": "java.lang.String",
+    "description": "A description for 'file.separtor'"
+  },
+  {
+    "name": "spring.jpa.hibernate.naming_strategy",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.naming_strategy'"
+  }
+]}
