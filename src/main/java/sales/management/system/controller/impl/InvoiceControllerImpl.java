@@ -52,7 +52,7 @@ public class InvoiceControllerImpl {
 	@Autowired
 	private JasperReportHelper jasperHelper;
 	
-	public StringResponse addNewInvoice(NewOrderRequest request) throws InvalidKeyException, ServerException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, XmlParserException, ErrorResponseException, IOException {
+	public StringResponse addNewInvoice(NewOrderRequest request) {
 		
 		String message = null;
 		boolean error = false;

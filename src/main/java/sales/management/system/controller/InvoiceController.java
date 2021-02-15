@@ -7,11 +7,15 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import sales.management.system.controller.impl.InvoiceControllerImpl;
+import sales.management.system.dtoRequest.NewOrderRequest;
 import sales.management.system.dtoResponse.InvoiceDto;
+import sales.management.system.dtoResponse.StringResponse;
 
 
 @RestController
@@ -26,6 +30,15 @@ public class InvoiceController {
 	public List<InvoiceDto> findInvoices(@PathVariable String fromDate, @PathVariable String toDate){
 		
 		List<InvoiceDto> response = invoiceControllerImpl.findInvoices(fromDate, toDate);
+		
+		return response;
+		
+	}
+	
+	@PostMapping(value = "create")
+	public StringResponse addNewInvoice(@RequestBody NewOrderRequest request) {
+		
+		StringResponse response = invoiceControllerImpl.addNewInvoice(request);
 		
 		return response;
 		
