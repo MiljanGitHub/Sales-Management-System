@@ -55,8 +55,13 @@ public class Company {
 	private Set<CommodityGroupe> commodityGroups;
 	
 	public void addInvoice(Invoice invoice) {
-		//this.invoices.add(invoice);
 		invoice.setCompany(this);
+	}
+	
+	public void addBussinesPartner(BussinesPartner bussinesPartner) {
+		bussinesPartner.setCompany(this);
+		partners.add(bussinesPartner);
+		
 	}
 
 }

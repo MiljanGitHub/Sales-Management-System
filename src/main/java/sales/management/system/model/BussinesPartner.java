@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sales.management.system.dtoResponse.Partner;
 import sales.management.system.model.enums.EBussinesPartnerType;
 
 @Entity(name = "BussinesPartner")
@@ -59,9 +60,19 @@ public class BussinesPartner {
 	@OneToMany(mappedBy = "partner")
 	private List<Invoice> invoices;
 	
+	
+	public BussinesPartner(Partner partner){
+		this.name = partner.getName();
+		this.address = partner.getAddress();
+		this.phoneNumber = partner.getPhone();
+		this.fax = partner.getTaxNumber();
+		this.email = partner.getEmail();
+		this.type = EBussinesPartnerType.A;
+	}
+	
+	
 
 	public void addInvoice(Invoice invoice) {
-		//this.invoices.add(invoice);
 		invoice.setPartner(this);
 	}
 
