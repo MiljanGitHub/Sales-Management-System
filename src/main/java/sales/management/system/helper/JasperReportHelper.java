@@ -9,6 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,10 +85,32 @@ public class JasperReportHelper {
 				File file = ResourceUtils.getFile("classpath:invoice1.jrxml");
 		        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 		        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(jasperReportItemDtos);
-		        
-		        Map<String, Object> parameters = new HashMap<>(); parameters.put("createdBy", "Sales Management App");
-		        
-		        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+		        Map<String, Object> parameters = new HashMap<>();
+		        parameters.put("createdBy", "Sales Management App");
+		        //BP - Business partner
+				parameters.put("BPname",invoice.getPartner().getName());
+				parameters.put("BPadress",invoice.getPartner().getAddress());
+				parameters.put("BPemail",invoice.getPartner().getEmail());
+				parameters.put("BPnumber",invoice.getPartner().getPhoneNumber());
+
+				parameters.put("basisTotal",invoice.getBasisTotal());
+				parameters.put("taxTotal",invoice.getTaxTotal());
+				parameters.put("total",invoice.getTotalAmmount());
+
+				long longValue = Long.parseLong(invoice.getInvoiceDate());
+				LocalDate dateIssued =Instant.ofEpochMilli(longValue).atZone(ZoneId.systemDefault()).toLocalDate();
+				parameters.put("dateIssued",dateIssued.toString());
+
+				long longValue1 = Long.parseLong(invoice.getCurrencyDate());
+				LocalDate currencyDate =Instant.ofEpochMilli(longValue1).atZone(ZoneId.systemDefault()).toLocalDate();
+				parameters.put("currencyDate",currencyDate.toString());
+
+				parameters.put("InvoiceNumber",invoice.getInvoiceNumber());
+
+
+
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
 		        JasperExportManager.exportReportToPdfFile(jasperPrint, tempFile.toAbsolutePath().toString());
 		        
