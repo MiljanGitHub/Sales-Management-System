@@ -106,8 +106,9 @@ public class InvoiceControllerImpl {
 			cal.setTimeInMillis(Long.valueOf(dto.getInvoiceDate()));
 			dto.setInvoiceDate(df.format(cal.getTime()));
 		});
-		
-		
+
+//		String bookURL=jasperHelper.generateInvoiceBook(invoicesDto,fromDate,toDate);
+//		System.out.println(bookURL);
 		return invoicesDto;
 		
 	}

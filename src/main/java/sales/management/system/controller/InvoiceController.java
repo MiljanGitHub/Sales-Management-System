@@ -16,6 +16,7 @@ import sales.management.system.controller.impl.InvoiceControllerImpl;
 import sales.management.system.dtoRequest.NewOrderRequest;
 import sales.management.system.dtoResponse.InvoiceDto;
 import sales.management.system.dtoResponse.StringResponse;
+import sales.management.system.helper.JasperReportHelper;
 
 
 @RestController
@@ -25,6 +26,9 @@ public class InvoiceController {
 	
 	@Autowired
 	private InvoiceControllerImpl invoiceControllerImpl;
+
+	@Autowired
+	private JasperReportHelper jasperHelper;
 	
 	@GetMapping(value = "invoiceBook/{fromDate}/{toDate}")
 	public List<InvoiceDto> findInvoices(@PathVariable String fromDate, @PathVariable String toDate){
@@ -33,6 +37,23 @@ public class InvoiceController {
 		
 		return response;
 		
+	}
+
+	@GetMapping(value = "generateInvoiceBookReport/{fromDate}/{toDate}")
+	public StringResponse generateReport(@PathVariable String fromDate, @PathVariable String toDate){
+		StringResponse stringResponse=new StringResponse();
+
+		try {
+			List<InvoiceDto> response = invoiceControllerImpl.findInvoices(fromDate, toDate);
+			String url = jasperHelper.generateInvoiceBook(invoiceControllerImpl.findInvoices(fromDate, toDate), fromDate, toDate);
+			System.out.println("aaa" +url);
+			stringResponse.setMessage(url);
+			return stringResponse;
+		}catch (Exception e){
+			e.printStackTrace();
+			return stringResponse;
+		}
+
 	}
 	
 	@PostMapping(value = "create")

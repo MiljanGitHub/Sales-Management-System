@@ -13,10 +13,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -42,6 +39,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import sales.management.system.dtoResponse.InvoiceDto;
 import sales.management.system.dtoResponse.JasperReportItemDto;
 import sales.management.system.model.Invoice;
 import sales.management.system.service.InvoiceService;
@@ -72,7 +70,8 @@ public class JasperReportHelper {
 			ArrayList<JasperReportItemDto> jasperReportItemDtos = invoice.getItems()
 					.stream().map(item -> new JasperReportItemDto(item))
 					.collect(Collectors.toCollection(ArrayList::new));
-	        
+			for (int i=0; i< jasperReportItemDtos.size();i++) {
+				jasperReportItemDtos.get(i).setNumber(i+1);};
 			String fileName = UUID.randomUUID().toString();
 	        String extension = ".pdf";
 
@@ -161,4 +160,81 @@ public class JasperReportHelper {
 		Thread t = new Thread(runnable);
 		t.start();
 	}
+
+	public String generateInvoiceBook(List<InvoiceDto> invoices,String from, String to){
+
+		for (int i=0; i< invoices.size();i++) {
+			invoices.get(i).setId(i+1);};
+
+			String fileName = "invoiceBook";
+			String extension = ".pdf";
+
+			Path projectPath = FileSystems.getDefault().getPath(System.getProperty(projectDirectory) + System.getProperty(fileSepartor));
+
+			try {
+
+				Path tempFile=Files.createTempFile(projectPath, fileName, extension);
+
+				File file = ResourceUtils.getFile("classpath:invoiceBook.jrxml");
+				JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+				JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(invoices);
+
+				Map<String, Object> parameters = new HashMap<>();
+				long longValue = Long.parseLong(from);
+				LocalDate dateIssued =Instant.ofEpochMilli(longValue).atZone(ZoneId.systemDefault()).toLocalDate();
+				parameters.put("dateFrom",dateIssued.toString());
+
+				long longValue1 = Long.parseLong(to);
+				LocalDate currencyDate =Instant.ofEpochMilli(longValue1).atZone(ZoneId.systemDefault()).toLocalDate();
+				parameters.put("dateTo",currencyDate.toString());
+//
+//				parameters.put("dateFrom", from);
+//				parameters.put("dateTo", to);
+
+
+
+
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+				JasperExportManager.exportReportToPdfFile(jasperPrint, tempFile.toAbsolutePath().toString());
+
+				InputStream targetStream = new FileInputStream(tempFile.toFile());
+
+				minioClient.putObject(
+						PutObjectArgs.builder()
+								.bucket(minioInvoiceBucketName)
+								.object(fileName).stream(
+								targetStream, -1, 10485760)
+								.contentType("application/pdf") //for now only PDF documents
+								.build());
+
+				//close stream so that temp file can be deleted
+				targetStream.close();
+
+				//delete temp file from project directory
+				Files.delete(tempFile);
+
+				String url =
+						minioClient.getPresignedObjectUrl(
+								GetPresignedObjectUrlArgs.builder()
+										.method(Method.GET)
+										.bucket(minioInvoiceBucketName)
+										.object(fileName)
+										.expiry(7, TimeUnit.DAYS)
+										.build());
+
+				return url;
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+				return "Error generating invoice book";
+
+			}
+
+
+
+	}
+
 }
