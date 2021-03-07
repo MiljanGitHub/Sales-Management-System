@@ -16,4 +16,7 @@ public interface TaxRepository extends JpaRepository<Tax, Integer>{
 	
 	@Query(name = "findRawTaxValuesPerCommodityGroup", nativeQuery = true)
 	RawTax findRawTaxValuesPerCommodityGroup(@Param("commodityGroupId") int commodityGroupId, @Param("requestedTime") long requestedTime);
+
+	@Query(value = "select *  from tax where commodity_groupe_id = :commodityGroupId and valid_from in (SELECT MAX(t.valid_from) FROM tax t WHERE t.valid_from + 0 <= :requestedTime);", nativeQuery = true)
+	Tax findTax(@Param("commodityGroupId") int commodityGroupId, @Param("requestedTime") long requestedTime);
 }

@@ -19,6 +19,8 @@ import sales.management.system.dtoResponse.RawPricelistItem;
 import sales.management.system.dtoResponse.RawTax;
 import sales.management.system.model.Company;
 import sales.management.system.model.Pricelist;
+import sales.management.system.model.Tax;
+import sales.management.system.repository.TaxRepository;
 import sales.management.system.service.CompanyService;
 import sales.management.system.service.PricelistItemService;
 import sales.management.system.service.PricelistService;
@@ -41,6 +43,9 @@ public class PriceListControllerImpl {
  	
  	@Autowired
  	private CompanyService companyService;
+
+ 	@Autowired
+ 	private TaxRepository taxRepository;
  	
 	
 	public PricelistItemResponse getPricelistItems(String requestedTime) {
@@ -54,9 +59,11 @@ public class PriceListControllerImpl {
 			
 			rawPricelistItems.forEach(item -> {
 				
-				RawTax rt = taxService.findRawTaxValuesPerCommodityGroup(item.getCommodityGroupId(), Long.valueOf(requestedTime));
-				
-				item.setTax(rt.getTax());
+//				RawTax rt = taxService.findRawTaxValuesPerCommodityGroup(item.getCommodityGroupId(), Long.valueOf(requestedTime));
+				RawTax rt=new RawTax(1,10.0);// ovo sam dodao jer ovo gore puca ..
+				Tax t=taxRepository.findTax(item.getCommodityGroupId(),Long.valueOf(requestedTime));
+				item.setTax(t.getPercentage());
+//				item.setTax(rt.getTax());
 				
 			});
 					
@@ -131,8 +138,11 @@ public class PriceListControllerImpl {
 				//set tax rate
 				System.out.println("ssssssssssssssssssssssssssssss");
 				RawTax rt = taxService.findRawTaxValuesPerCommodityGroup(detail.getCommodityGroupId(), requestedTime);
-				//RawTax rt=new RawTax(1,10.0);// ovo sam dodao jer ovo gore puca ...
-				detail.setTaxRate(rt.getTax());
+//				RawTax rt=new RawTax(1,10.0);// ovo sam dodao jer ovo gore puca ...
+//				detail.setTaxRate(rt.getTax());
+
+				Tax t=taxRepository.findTax(detail.getCommodityGroupId(),requestedTime);
+				detail.setTaxRate(t.getPercentage());
 				System.out.println("dddddddddddddddddd");
 				
 			});	
