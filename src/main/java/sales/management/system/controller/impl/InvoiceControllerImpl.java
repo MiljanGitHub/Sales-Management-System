@@ -5,12 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import sales.management.system.dtoRequest.NewOrderRequest;
+import sales.management.system.dtoRequest.OrderItem;
 import sales.management.system.dtoResponse.InvoiceDto;
 import sales.management.system.dtoResponse.StringResponse;
 import sales.management.system.helper.JasperReportHelper;
@@ -45,18 +47,47 @@ public class InvoiceControllerImpl {
 	
 	public StringResponse addNewInvoice(NewOrderRequest request) {
 		
+//		System.out.println("-----------------------------");
+//		System.out.println("pocinje invoice");
+//		System.out.println("Total basis: " + request.getTotalBasis());
+//		System.out.println("taxAmount: " + request.getTaxAmount());
+//		System.out.println("total: " + request.getTotal());
+//		System.out.println("zavrsio invoice");
+//		System.out.println("");
+//		System.out.println("-----------------------------");
+//		System.out.println("pocinju svi item-i");
+//		List<OrderItem> items = request.getItems();
+//		for(int i = 0; i < items.size(); i++) {
+//			OrderItem it = items.get(i);
+//			System.out.println("item " + i+1 + " pocinje");
+//			
+//			System.out.println("amount " + it.getAmount());
+//			System.out.println("unitPrice " + it.getUnitPrice());
+//			System.out.println("taxPercentage " + it.getTaxPercentage());
+//			System.out.println("taxAmount " + it.getTaxAmount());
+//			System.out.println("total " + it.getTotal());
+//			System.out.println("item " + i+1 + " zavrsava");
+//		}
+//		
+//		
+//		
+//		System.out.println("zavrsavaju se svi item-i");
+//		System.out.println("-----------------------------");
+		
+		
+		
 		String message = null;
 		boolean error = false;
 		
 		Invoice newInvoice = new Invoice(); newInvoice.setItems(new ArrayList<InvoiceItem>());
 		
-		newInvoice.setInvoiceNumber(String.valueOf(System.currentTimeMillis()));
+		newInvoice.setInvoiceNumber(String.valueOf(System.currentTimeMillis())); //setujemo jedinstveni identifikator invoice-a
 		newInvoice.setInvoiceDate(String.valueOf(System.currentTimeMillis()));
-		newInvoice.setCurrencyDate(String.valueOf(System.currentTimeMillis()));
+		newInvoice.setCurrencyDate(String.valueOf(TimeUnit.DAYS.toMillis(30) + Long.valueOf(newInvoice.getInvoiceDate()))); //datum do kada treba da se plati fakutra, najcesce 30 dana
 		newInvoice.setStatus(EInvoiceStatus.NOT_PAID);
 		newInvoice.setBasisTotal(request.getTotalBasis());
 		newInvoice.setTaxTotal(request.getTaxAmount());
-		newInvoice.setTotalAmmount(request.getTotalBasis());
+		newInvoice.setTotalAmmount(request.getTotal());
 		
 		BussinesPartner bp = bussinesPartnerService.findById(request.getBussinesPartnerId());
 		
@@ -90,6 +121,7 @@ public class InvoiceControllerImpl {
 		jasperHelper.generateJasperReport(newlySavedInvoice);
 
 		return new StringResponse(message, error, 200);
+//		return null;
 	}
 	
 	public List<InvoiceDto> findInvoices(String fromDate, String toDate){

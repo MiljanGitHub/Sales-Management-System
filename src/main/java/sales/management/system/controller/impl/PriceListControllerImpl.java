@@ -129,9 +129,11 @@ public class PriceListControllerImpl {
 			details.forEach(detail -> {
 
 				//set tax rate
-//				RawTax rt = taxService.findRawTaxValuesPerCommodityGroup(detail.getCommodityGroupId(), requestedTime);
-				RawTax rt=new RawTax(1,10.0);// ovo sam dodao jer ovo gore puca ...
+				System.out.println("ssssssssssssssssssssssssssssss");
+				RawTax rt = taxService.findRawTaxValuesPerCommodityGroup(detail.getCommodityGroupId(), requestedTime);
+				//RawTax rt=new RawTax(1,10.0);// ovo sam dodao jer ovo gore puca ...
 				detail.setTaxRate(rt.getTax());
+				System.out.println("dddddddddddddddddd");
 				
 			});	
 			
