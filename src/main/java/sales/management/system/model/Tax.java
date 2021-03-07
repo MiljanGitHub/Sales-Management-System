@@ -15,14 +15,16 @@ import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "Tax")
 @Table(name = "tax")
 @NoArgsConstructor
-@Data
+@Getter
 @Setter
 @SqlResultSetMappings({ //
 
@@ -61,6 +63,7 @@ public class Tax {
 	private String validFrom;
 	
 	//@OneToMany(mappedBy = "tax")
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="commodity_groupe_id")
 	private CommodityGroupe commodityGroup;

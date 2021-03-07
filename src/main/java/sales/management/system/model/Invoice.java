@@ -23,6 +23,7 @@ import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sales.management.system.model.enums.EInvoiceStatus;
@@ -30,7 +31,7 @@ import sales.management.system.model.enums.EInvoiceStatus;
 @Entity(name = "Invoice")
 @Table(name = "invoice")
 @NoArgsConstructor
-@Data
+@Getter
 @Setter
 @SqlResultSetMappings({ //
 

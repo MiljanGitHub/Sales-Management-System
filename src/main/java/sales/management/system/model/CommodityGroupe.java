@@ -12,14 +12,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity(name = "CommodityGroupe")
 @Table(name = "commodity_groupe")
 @NoArgsConstructor
-@Data
+@Getter
 @Setter
 public class CommodityGroupe {
 	
@@ -30,11 +32,13 @@ public class CommodityGroupe {
 
 	@Column(nullable = false,length = 40)
 	private String name;
-	
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "commodityGroupe")
 	private Set<Commodity> commodities;
 	

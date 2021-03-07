@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sales.management.system.dtoRequest.OrderItem;
@@ -17,7 +18,7 @@ import sales.management.system.dtoRequest.OrderItem;
 @Entity(name = "Item")
 @Table(name = "item")
 @NoArgsConstructor
-@Data
+@Getter
 @Setter
 //@EqualsAndHashCode
 public class InvoiceItem {
